@@ -1,0 +1,45 @@
+{% extends 'first/base.html' %}
+{% load crispy_forms_tags %}
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+{%block content%}
+
+
+<body>
+    {%for msg in messages%}
+    <div id="message_container" class="alert alert-success alert-dismissible fade show" role="alert">
+        <strong>Hey</strong> {{user.username}} {{msg}}
+    </div>
+    {%endfor%}
+
+    <div class="input-group input-group-sm mb-3">
+        <form action="" method="POST">
+            {%csrf_token%}
+            {{form|crispy}}
+            <input type="submit" value="submit" class="btn btn-outline-secondary sm">
+            <table>
+
+            </table>
+        </form>
+    </div>
+    <a href="{% url 'home' %}">Click here to see your content</a>
+
+    <script>
+        var message_ele = document.getElementById("message_container");
+
+        setTimeout(function () {
+            message_ele.style.display = "none";
+        }, 2000);
+    </script>
+</body>
+{%endblock%}
+
+</html>
